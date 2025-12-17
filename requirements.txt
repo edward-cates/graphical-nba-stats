@@ -1,0 +1,15 @@
+fastapi
+matplotlib
+uvicorn
+psycopg2-binary
+pandas
+requests
+python-multipart
+pytest
+starlette
+tqdm
+pydantic
+pydantic_core
+httpx
+Jinja2
+pytz

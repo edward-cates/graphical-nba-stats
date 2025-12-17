@@ -3,10 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>NBA Cumulative Standings Graphs 2025-26 Season | Win-Loss Record Charts</title>
+    <meta name="description" content="Visual NBA standings graphs showing cumulative win-loss records for all 30 teams throughout the 2025-26 season. Updated weekly with Eastern and Western Conference charts.">
+    <meta name="keywords" content="NBA standings, NBA cumulative standings, NBA win loss graph, NBA 2025-26 season, Eastern Conference standings, Western Conference standings, NBA team records, basketball standings chart">
+    <meta name="author" content="NBA Standings Tracker">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://graphical-nba-stats.herokuapp.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://graphical-nba-stats.herokuapp.com/">
+    <meta property="og:title" content="NBA Cumulative Standings Graphs 2025-26 Season">
+    <meta property="og:description" content="Visual NBA standings graphs showing cumulative win-loss records for all 30 teams. Updated weekly with Eastern and Western Conference charts.">
+    <meta property="og:image" content="https://graphical-nba-stats.herokuapp.com/nba-standings/eastern-conference/2025-12-17.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="800">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NBA Cumulative Standings Graphs 2025-26 Season">
+    <meta name="twitter:description" content="Visual NBA standings graphs showing cumulative win-loss records for all 30 teams. Updated weekly.">
+    <meta name="twitter:image" content="https://graphical-nba-stats.herokuapp.com/nba-standings/eastern-conference/2025-12-17.png">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "NBA Cumulative Standings Graphs 2025-26 Season",
+        "description": "Visual NBA standings graphs showing cumulative win-loss records for all 30 teams throughout the 2025-26 season.",
+        "url": "https://graphical-nba-stats.herokuapp.com/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "NBA Standings Graphs by Date",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "ImageObject",
+                        "name": "NBA Eastern Conference Cumulative Standings Graph - December 17, 2025",
+                        "contentUrl": "https://graphical-nba-stats.herokuapp.com/nba-standings/eastern-conference/2025-12-17.png",
+                        "description": "Graph showing cumulative win-loss records for all 15 NBA Eastern Conference teams through December 17, 2025",
+                        "datePublished": "2025-12-17"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@type": "ImageObject",
+                        "name": "NBA Western Conference Cumulative Standings Graph - December 17, 2025",
+                        "contentUrl": "https://graphical-nba-stats.herokuapp.com/nba-standings/western-conference/2025-12-17.png",
+                        "description": "Graph showing cumulative win-loss records for all 15 NBA Western Conference teams through December 17, 2025",
+                        "datePublished": "2025-12-17"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --accent-east: #c9082a;
+            --accent-west: #1d428a;
+            --border-subtle: #2a2a3a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(90deg, var(--accent-east), var(--accent-west));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .standings-week {
+            margin-bottom: 4rem;
+        }
+        
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-subtle);
+        }
+        
+        .week-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .week-header time {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .standings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
+            gap: 2rem;
+        }
+        
+        .standings-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .standings-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .standings-card.east {
+            border-top: 3px solid var(--accent-east);
+        }
+        
+        .standings-card.west {
+            border-top: 3px solid var(--accent-west);
+        }
+        
+        .standings-card figure {
+            margin: 0;
+        }
+        
+        .standings-card figcaption {
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+        }
+        
+        .standings-card figcaption h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .standings-card figcaption p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .standings-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #fff;
+        }
+        
+        .standings-card a {
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            
+            .standings-grid {
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <script src="script.js"></script>
+    <header>
+        <h1>NBA Cumulative Standings Graphs</h1>
+        <p>Track every NBA team's win-loss record throughout the 2025-26 season with weekly visual standings charts for both conferences.</p>
+    </header>
+    
+    <main>
+        <!-- December 17, 2025 -->
+        <article class="standings-week" id="2025-12-17">
+            <header class="week-header">
+                <h2>NBA Standings Through Week 10</h2>
+                <time datetime="2025-12-17">December 17, 2025</time>
+            </header>
+            
+            <div class="standings-grid">
+                <article class="standings-card east">
+                    <figure>
+                        <a href="/nba-standings/eastern-conference/2025-12-17.png" title="View full size NBA Eastern Conference Standings Graph - December 17, 2025">
+                            <img 
+                                src="/nba-standings/eastern-conference/2025-12-17.png" 
+                                alt="NBA Eastern Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams including Celtics, Bucks, 76ers, Knicks, Heat, Cavaliers, Hawks, Bulls, Nets, Raptors, Hornets, Wizards, Magic, Pacers, and Pistons through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="eager"
+                            >
+                        </a>
+                        <figcaption>
+                            <h3>Eastern Conference Cumulative Standings</h3>
+                            <p>Win-loss record progression for all 15 Eastern Conference teams through December 17, 2025</p>
+                        </figcaption>
+                    </figure>
+                </article>
+                
+                <article class="standings-card west">
+                    <figure>
+                        <a href="/nba-standings/western-conference/2025-12-17.png" title="View full size NBA Western Conference Standings Graph - December 17, 2025">
+                            <img 
+                                src="/nba-standings/western-conference/2025-12-17.png" 
+                                alt="NBA Western Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Western Conference teams including Lakers, Warriors, Suns, Clippers, Kings, Nuggets, Timberwolves, Thunder, Pelicans, Grizzlies, Spurs, Mavericks, Rockets, Jazz, and Trail Blazers through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="eager"
+                            >
+                        </a>
+                        <figcaption>
+                            <h3>Western Conference Cumulative Standings</h3>
+                            <p>Win-loss record progression for all 15 Western Conference teams through December 17, 2025</p>
+                        </figcaption>
+                    </figure>
+                </article>
+            </div>
+        </article>
+        
+        <!-- 
+        ============================================================
+        HOW TO ADD NEW WEEKLY STANDINGS:
+        ============================================================
+        1. Copy new standings images to img/standings/ with names:
+           - nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png
+           - nba-western-conference-cumulative-standings-YYYY-MM-DD.png
+        
+        2. Copy the <article class="standings-week"> block above
+        
+        3. Paste it ABOVE the previous week (newest first)
+        
+        4. Update:
+           - id="YYYY-MM-DD"
+           - Week number in h2
+           - datetime and visible date
+           - All image src and href paths
+           - Alt text dates
+           - Figcaption dates
+        
+        5. Update Schema.org JSON-LD in <head> to add new images
+        ============================================================
+        -->
+    </main>
+    
+    <footer>
+        <p>NBA Cumulative Standings Graphs - 2025-26 Season</p>
+        <p>Updated weekly with the latest team records and standings visualizations.</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://hoopsgraphs.com/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-17.png</image:loc>
+      <image:title>NBA Eastern Conference Cumulative Standings - December 17, 2025</image:title>
+      <image:caption>Graph showing cumulative win-loss records for all 15 NBA Eastern Conference teams through December 17, 2025</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/western-conference/2025-12-17.png</image:loc>
+      <image:title>NBA Western Conference Cumulative Standings - December 17, 2025</image:title>
+      <image:caption>Graph showing cumulative win-loss records for all 15 NBA Western Conference teams through December 17, 2025</image:caption>
+    </image:image>
+  </url>
+</urlset>
+

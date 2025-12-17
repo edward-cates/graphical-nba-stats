@@ -47,6 +47,10 @@ async def root():
     with open("src/web/index.html", "r") as f:
         return f.read()
 
+@app.get("/sitemap.xml")
+async def sitemap():
+    return FileResponse("src/web/sitemap.xml", media_type="application/xml")
+
 @app.get("/hello-world")
 async def hello_world():
     return "hi"

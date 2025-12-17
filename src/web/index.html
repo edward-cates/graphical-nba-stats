@@ -66,16 +66,26 @@
     }
     </script>
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a24;
-            --text-primary: #f0f0f5;
-            --text-secondary: #a0a0b0;
-            --accent-east: #c9082a;
-            --accent-west: #1d428a;
-            --border-subtle: #2a2a3a;
+            --bg-page: #f8f6f3;
+            --bg-card: #ffffff;
+            --bg-header: #1a1a1a;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --text-inverse: #f8f6f3;
+            --accent-east: #c41e3a;
+            --accent-west: #0057b8;
+            --border-light: #e8e6e3;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
         }
         
         * {
@@ -84,112 +94,197 @@
             box-sizing: border-box;
         }
         
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.5;
             min-height: 100vh;
         }
         
-        header {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 3rem 1rem;
+        /* Header */
+        .site-header {
+            background: var(--bg-header);
+            color: var(--text-inverse);
+            padding: 4rem 1.5rem 4.5rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        h1 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            background: linear-gradient(90deg, var(--accent-east), var(--accent-west));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 30, 58, 0.15), transparent),
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(0, 87, 184, 0.15), transparent);
+            pointer-events: none;
         }
         
-        header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
+        .header-content {
+            position: relative;
+            max-width: 700px;
             margin: 0 auto;
         }
         
+        .site-header h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .site-header .tagline {
+            font-size: 1.125rem;
+            color: rgba(248, 246, 243, 0.7);
+            font-weight: 400;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .season-badge {
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            padding: 0.375rem 0.875rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        /* Main */
         main {
-            max-width: 1400px;
+            max-width: 1320px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 3rem 1.5rem 4rem;
         }
         
+        /* Week Section */
         .standings-week {
             margin-bottom: 4rem;
         }
         
+        .standings-week:last-of-type {
+            margin-bottom: 0;
+        }
+        
         .week-header {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 1rem;
             margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border-subtle);
+            flex-wrap: wrap;
         }
         
         .week-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
         
         .week-header time {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
         
+        /* Grid */
         .standings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
         }
         
+        @media (max-width: 1024px) {
+            .standings-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+        }
+        
+        /* Cards */
         .standings-card {
             background: var(--bg-card);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
         }
         
         .standings-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .standings-card.east {
-            border-top: 3px solid var(--accent-east);
-        }
-        
-        .standings-card.west {
-            border-top: 3px solid var(--accent-west);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
         }
         
         .standings-card figure {
             margin: 0;
         }
         
-        .standings-card figcaption {
+        .standings-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 1rem 1.25rem;
-            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-light);
         }
         
-        .standings-card figcaption h3 {
-            font-size: 1.1rem;
+        .card-header h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+        
+        .conference-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            font-size: 0.6875rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
         
-        .standings-card figcaption p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .conference-badge.east {
+            background: rgba(196, 30, 58, 0.1);
+            color: var(--accent-east);
+        }
+        
+        .conference-badge.west {
+            background: rgba(0, 87, 184, 0.1);
+            color: var(--accent-west);
+        }
+        
+        .conference-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
         }
         
         .standings-card img {
@@ -199,52 +294,99 @@
             background: #fff;
         }
         
-        .standings-card a {
-            display: block;
+        .card-footer {
+            padding: 0.875rem 1.25rem;
+            background: #fafaf9;
+            border-top: 1px solid var(--border-light);
         }
         
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
+        .card-footer p {
+            font-size: 0.875rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-subtle);
-            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        footer p {
-            margin-bottom: 0.5rem;
+        .card-footer p::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z'/%3E%3C/svg%3E");
+            background-size: contain;
+            flex-shrink: 0;
         }
         
-        @media (max-width: 768px) {
-            header {
-                padding: 2rem 1rem;
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-card);
+        }
+        
+        .site-footer p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .site-footer p + p {
+            margin-top: 0.25rem;
+        }
+        
+        .footer-brand {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .site-header {
+                padding: 3rem 1rem 3.5rem;
             }
             
-            .standings-grid {
-                gap: 1.5rem;
+            main {
+                padding: 2rem 1rem 3rem;
+            }
+            
+            .week-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>NBA Cumulative Standings Graphs</h1>
-        <p>Track every NBA team's win-loss record throughout the 2025-26 season with weekly visual standings charts for both conferences.</p>
+    <header class="site-header">
+        <div class="header-content">
+            <span class="season-badge">2025–26 Season</span>
+            <h1>NBA Cumulative Standings</h1>
+            <p class="tagline">Weekly graphs tracking every team's win-loss record progression throughout the season.</p>
+        </div>
     </header>
     
     <main>
         <!-- December 17, 2025 -->
         <article class="standings-week" id="2025-12-17">
             <header class="week-header">
-                <h2>NBA Standings Through Week 10</h2>
+                <h2>Week 10</h2>
                 <time datetime="2025-12-17">December 17, 2025</time>
             </header>
             
             <div class="standings-grid">
-                <article class="standings-card east">
+                <article class="standings-card">
                     <figure>
                         <a href="/nba-standings/eastern-conference/2025-12-17.png" title="View full size NBA Eastern Conference Standings Graph - December 17, 2025">
+                            <div class="card-header">
+                                <h3>Eastern Conference</h3>
+                                <span class="conference-badge east">East</span>
+                            </div>
                             <img 
                                 src="/nba-standings/eastern-conference/2025-12-17.png" 
                                 alt="NBA Eastern Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams including Celtics, Bucks, 76ers, Knicks, Heat, Cavaliers, Hawks, Bulls, Nets, Raptors, Hornets, Wizards, Magic, Pacers, and Pistons through the 2025-26 NBA season"
@@ -253,16 +395,19 @@
                                 loading="eager"
                             >
                         </a>
-                        <figcaption>
-                            <h3>Eastern Conference Cumulative Standings</h3>
-                            <p>Win-loss record progression for all 15 Eastern Conference teams through December 17, 2025</p>
+                        <figcaption class="card-footer">
+                            <p>Games over .500 through 27 games played</p>
                         </figcaption>
                     </figure>
                 </article>
                 
-                <article class="standings-card west">
+                <article class="standings-card">
                     <figure>
                         <a href="/nba-standings/western-conference/2025-12-17.png" title="View full size NBA Western Conference Standings Graph - December 17, 2025">
+                            <div class="card-header">
+                                <h3>Western Conference</h3>
+                                <span class="conference-badge west">West</span>
+                            </div>
                             <img 
                                 src="/nba-standings/western-conference/2025-12-17.png" 
                                 alt="NBA Western Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Western Conference teams including Lakers, Warriors, Suns, Clippers, Kings, Nuggets, Timberwolves, Thunder, Pelicans, Grizzlies, Spurs, Mavericks, Rockets, Jazz, and Trail Blazers through the 2025-26 NBA season"
@@ -271,9 +416,8 @@
                                 loading="eager"
                             >
                         </a>
-                        <figcaption>
-                            <h3>Western Conference Cumulative Standings</h3>
-                            <p>Win-loss record progression for all 15 Western Conference teams through December 17, 2025</p>
+                        <figcaption class="card-footer">
+                            <p>Games over .500 through 27 games played</p>
                         </figcaption>
                     </figure>
                 </article>
@@ -298,16 +442,16 @@
            - datetime and visible date
            - All image src and href paths
            - Alt text dates
-           - Figcaption dates
+           - Figcaption description (games played count)
         
         5. Update Schema.org JSON-LD in <head> to add new images
         ============================================================
         -->
     </main>
     
-    <footer>
-        <p>NBA Cumulative Standings Graphs - 2025-26 Season</p>
-        <p>Updated weekly with the latest team records and standings visualizations.</p>
+    <footer class="site-footer">
+        <p class="footer-brand">NBA Cumulative Standings</p>
+        <p>Updated weekly throughout the 2025–26 season</p>
     </footer>
 </body>
 </html>

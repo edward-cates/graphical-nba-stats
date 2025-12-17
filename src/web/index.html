@@ -460,5 +460,16 @@
         <p class="footer-brand">NBA Cumulative Standings</p>
         <p>Updated weekly throughout the 2025–26 season</p>
     </footer>
+    
+    <script>
+    document.querySelectorAll('.standings-card a').forEach(link => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            const conference = href.includes('eastern') ? 'Eastern' : 'Western';
+            const date = href.match(/\d{4}-\d{2}-\d{2}/)?.[0] || 'unknown';
+            plausible('Image Click', {props: {conference, date}});
+        });
+    });
+    </script>
 </body>
 </html>

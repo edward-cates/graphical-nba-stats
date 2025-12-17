@@ -134,11 +134,11 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
 
     conference_name = "Eastern" if conference == "east" else "Western"
 
-    # Legend positioning - align plot area with legend
+    # Legend positioning - small gap below subtitle, tight bottom
     num_teams = len(sorted_teams)
-    legend_top = 0.96
-    legend_spacing = 0.058
-    legend_bottom = legend_top - ((num_teams - 1) * legend_spacing)
+    legend_top = 0.97
+    legend_bottom = 0.04
+    legend_spacing = (legend_top - legend_bottom) / (num_teams - 1)
 
     fig.update_layout(
         font=dict(family="Arial, Helvetica, sans-serif", color=text_color),
@@ -162,10 +162,10 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
             zerolinewidth=2,
             tickfont=dict(size=14, color=muted_text),
             linecolor=grid_color,
-            domain=[legend_bottom, legend_top],  # Align with legend
+            domain=[legend_bottom, legend_top],
         ),
         showlegend=False,
-        margin=dict(l=65, r=210, t=90, b=50),
+        margin=dict(l=65, r=210, t=70, b=25),
         width=chart_w,
         height=chart_h,
         hovermode="x unified",
@@ -176,9 +176,9 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
         ),
     )
 
-    # Title
+    # Title - centered between image top and plot
     fig.add_annotation(
-        x=0.0, y=1.055,
+        x=0.0, y=1.04,
         xref="paper", yref="paper",
         text=f"<b>NBA {conference_name} Conference</b>",
         showarrow=False,
@@ -188,7 +188,7 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
 
     # Subtitle
     fig.add_annotation(
-        x=0.0, y=1.02,
+        x=0.0, y=1.005,
         xref="paper", yref="paper",
         text="2025-26 Season · Cumulative Record",
         showarrow=False,

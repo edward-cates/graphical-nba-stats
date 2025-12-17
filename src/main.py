@@ -20,7 +20,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="src/web"), name="static")
 
 @app.get("/hello-world")
-async def hello_world(token: str):
+async def hello_world():
     return "hi"
 
 

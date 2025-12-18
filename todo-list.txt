@@ -1,0 +1,3 @@
+- add a favicon (need a pic to use 🤔)
+- say "over time" instead of "cumulative" (but don't edit existing chart, links, metadata, etc. - just future ones)
+

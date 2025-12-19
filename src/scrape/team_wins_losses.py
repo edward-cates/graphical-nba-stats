@@ -61,12 +61,18 @@ def get_team_wins_losses(team_abbreviation: str) -> list[dict]:
     return results
 
 
+def get_cache_date_suffix() -> str:
+    """Get today's date as YY-MM-DD for cache filename."""
+    return datetime.now().strftime("%y-%m-%d")
+
+
 def get_team_wins_losses_cached(
     team_abbreviation: str, cache_dir: Path = Path(".teams")
 ) -> list[dict]:
     """Get wins/losses for a team, using cache if available."""
     cache_dir.mkdir(exist_ok=True)
-    cache_file = cache_dir / f"{team_abbreviation}.json"
+    date_suffix = get_cache_date_suffix()
+    cache_file = cache_dir / f"{team_abbreviation}-{date_suffix}.json"
 
     if cache_file.exists():
         print(f"{team_abbreviation}: cached")

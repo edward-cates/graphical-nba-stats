@@ -3,6 +3,7 @@
 import argparse
 import base64
 import json
+from datetime import datetime
 from pathlib import Path
 
 import plotly.graph_objects as go
@@ -29,12 +30,18 @@ def get_conference_teams(conference: str) -> list[str]:
     return [abbr for abbr, info in TEAMS.items() if info["conference"] == conference]
 
 
+def get_cache_date_suffix() -> str:
+    """Get today's date as YY-MM-DD for cache filename."""
+    return datetime.now().strftime("%y-%m-%d")
+
+
 def get_cumulative_standings_cached(
     conference: str, cache_dir: Path = Path(".standings")
 ) -> dict:
     """Get cumulative standings data, using cache if available."""
     cache_dir.mkdir(exist_ok=True)
-    cache_file = cache_dir / f"{conference}_data.json"
+    date_suffix = get_cache_date_suffix()
+    cache_file = cache_dir / f"{conference}_data-{date_suffix}.json"
 
     if cache_file.exists():
         print(f"{conference} standings: cached")

@@ -1,4 +1,4 @@
-.PHONY: lint up scrape scrape-all
+.PHONY: lint up scrape scrape-all standings-east standings-west
 
 PYTHON := $(shell conda run -n nba which python)
 
@@ -21,4 +21,10 @@ endif
 
 scrape-all:
 	@python -m src.scrape.teams
+
+standings-east:
+	@python -m src.scripts.standings_plot east
+
+standings-west:
+	@python -m src.scripts.standings_plot west
 

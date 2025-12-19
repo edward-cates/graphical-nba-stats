@@ -2,12 +2,20 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
+from typing import TypedDict
 
 import requests
 from bs4 import BeautifulSoup
 
 
-def get_team_wins_losses(team_abbreviation: str) -> list[dict]:
+class GameResult(TypedDict):
+    date: str
+    opponent: str
+    opponent_abbrev: str
+    win: bool
+
+
+def get_team_wins_losses(team_abbreviation: str) -> list[GameResult]:
     """Scrape wins/losses for a team from ESPN."""
     url = f"https://www.espn.com/nba/team/schedule/_/name/{team_abbreviation}"
     headers = {
@@ -48,13 +56,33 @@ def get_team_wins_losses(team_abbreviation: str) -> list[dict]:
         date_text = date_elem.get_text(strip=True)  # e.g. "Wed, Oct 22"
         win = symbol.get_text(strip=True) == "W"
 
+        # Get opponent name and abbreviation from link
+        opponent_elem = row.find(attrs={"data-testid": "opponent"})
+        opponent = ""
+        opponent_abbrev = ""
+        if opponent_elem:
+            opponent = opponent_elem.get_text(strip=True)
+            # Clean up opponent text (remove "vs" or "@" prefix)
+            opponent = re.sub(r"^(vs|@)\s*", "", opponent).strip()
+            # Extract abbreviation from opponent link (e.g. /nba/team/_/name/no/...)
+            link = opponent_elem.find("a", href=re.compile(r"/nba/team/_/name/"))
+            if link and link.get("href"):
+                match = re.search(r"/nba/team/_/name/([^/]+)", link["href"])
+                if match:
+                    opponent_abbrev = match.group(1)
+
         # Parse the date (add dummy year to avoid deprecation warning)
         try:
             parsed = datetime.strptime(f"{date_text} 2000", "%a, %b %d %Y")
             # Determine year based on month
             year = first_year if parsed.month >= 10 else second_year
             date_str = f"{year % 100:02d}-{parsed.month:02d}-{parsed.day:02d}"
-            results.append({"date": date_str, "win": win})
+            results.append({
+                "date": date_str,
+                "opponent": opponent,
+                "opponent_abbrev": opponent_abbrev,
+                "win": win,
+            })
         except ValueError:
             continue  # Skip unparseable dates
 
@@ -68,7 +96,7 @@ def get_cache_date_suffix() -> str:
 
 def get_team_wins_losses_cached(
     team_abbreviation: str, cache_dir: Path = Path(".teams")
-) -> list[dict]:
+) -> list[GameResult]:
     """Get wins/losses for a team, using cache if available."""
     cache_dir.mkdir(exist_ok=True)
     date_suffix = get_cache_date_suffix()

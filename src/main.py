@@ -6,8 +6,6 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
 
-from src.db import Db
-
 # Load environment variables from .env.json
 env_path = Path('.env.json')
 if env_path.exists():

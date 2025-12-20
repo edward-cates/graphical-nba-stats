@@ -1,4 +1,4 @@
-.PHONY: lint up scrape scrape-all standings-east standings-west head-to-head
+.PHONY: lint up scrape scrape-all standings-east standings-west head-to-head east-vs-west
 
 PYTHON := $(shell conda run -n nba which python)
 
@@ -30,4 +30,7 @@ standings-west:
 
 head-to-head:
 	@python -m src.scripts.head_to_head_plot
+
+east-vs-west:
+	@python -m src.scripts.conference_battle_plot
 

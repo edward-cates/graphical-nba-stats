@@ -12,64 +12,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO Meta Tags -->
-    <title>NBA Standings Over Time | 2025-26 Season Graphs & Charts</title>
-    <meta name="description" content="Track NBA standings over time with weekly graphs showing how every team's record evolves throughout the 2025-26 season. Visual win-loss charts for Eastern and Western Conference.">
-    <meta name="keywords" content="NBA standings over time, NBA standings history, NBA cumulative standings, NBA win loss graph, NBA 2025-26 season, Eastern Conference standings, Western Conference standings, NBA team records, basketball standings chart">
-    <meta name="author" content="NBA Standings Tracker">
+    <title>NBA Graphs & Charts | Standings, Head-to-Head, East vs West | 2025-26</title>
+    <meta name="description" content="NBA visualizations updated weekly: standings over time, head-to-head records, and East vs West conference battle. Clean graphs for the 2025-26 season.">
+    <meta name="keywords" content="NBA standings over time, NBA head to head, NBA east vs west, NBA graphs, NBA charts, NBA 2025-26 season, Eastern Conference, Western Conference">
+    <meta name="author" content="Hoops Graphs">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://hoopsgraphs.com/">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hoopsgraphs.com/">
-    <meta property="og:title" content="NBA Standings Over Time | 2025-26 Season Graphs">
-    <meta property="og:description" content="Track NBA standings over time with weekly graphs showing every team's win-loss record evolution. Updated weekly for Eastern and Western Conference.">
-    <meta property="og:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-17.png">
+    <meta property="og:title" content="NBA Graphs & Charts | 2025-26 Season">
+    <meta property="og:description" content="NBA visualizations updated weekly: standings over time, head-to-head records, and East vs West conference battle.">
+    <meta property="og:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-20.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="800">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="NBA Standings Over Time | 2025-26 Season Graphs">
-    <meta name="twitter:description" content="Track NBA standings over time with weekly graphs showing every team's record evolution throughout the season.">
-    <meta name="twitter:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-17.png">
+    <meta name="twitter:title" content="NBA Graphs & Charts | 2025-26 Season">
+    <meta name="twitter:description" content="NBA visualizations updated weekly: standings, head-to-head, and conference battle.">
+    <meta name="twitter:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-20.png">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "NBA Standings Over Time | 2025-26 Season Graphs",
-        "description": "Track NBA standings over time with weekly graphs showing how every team's record evolves throughout the 2025-26 season.",
-        "url": "https://hoopsgraphs.com/",
-        "mainEntity": {
-            "@type": "ItemList",
-            "name": "NBA Standings Graphs by Date",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item": {
-                        "@type": "ImageObject",
-                        "name": "NBA Eastern Conference Standings Over Time - December 17, 2025",
-                        "contentUrl": "https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-17.png",
-                        "description": "Graph showing NBA Eastern Conference standings over time through December 17, 2025",
-                        "datePublished": "2025-12-17"
-                    }
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item": {
-                        "@type": "ImageObject",
-                        "name": "NBA Western Conference Standings Over Time - December 17, 2025",
-                        "contentUrl": "https://hoopsgraphs.com/nba-standings/western-conference/2025-12-17.png",
-                        "description": "Graph showing NBA Western Conference standings over time through December 17, 2025",
-                        "datePublished": "2025-12-17"
-                    }
-                }
-            ]
-        }
+        "@type": "WebSite",
+        "name": "Hoops Graphs",
+        "description": "NBA visualizations updated weekly: standings over time, head-to-head records, and East vs West conference battle.",
+        "url": "https://hoopsgraphs.com/"
     }
     </script>
     
@@ -97,18 +69,18 @@
             },
             {
                 "@type": "Question",
-                "name": "How often are these standings graphs updated?",
+                "name": "How often are these graphs updated?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We update the NBA standings graphs weekly, typically on Tuesdays. This cadence captures meaningful movement in the standings while keeping the archive manageable."
+                    "text": "We update all NBA graphs weekly, typically on Tuesdays. This cadence captures meaningful movement while keeping the archive manageable."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Why track standings over time instead of just current standings?",
+                "name": "Which conference is better, East or West?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Current standings only tell you where teams are right now. Tracking standings over time reveals the journey—a team in 6th place might be surging from 12th, or collapsing from 2nd. Context matters for understanding playoff races and trade deadline decisions."
+                    "text": "Our East vs West graph tracks this throughout the season by showing the cumulative inter-conference record. Check the graph to see which conference is currently winning."
                 }
             }
         ]
@@ -223,34 +195,42 @@
             padding: 3rem 1.5rem 4rem;
         }
         
-        /* Week Section */
-        .standings-week {
+        /* Section */
+        .graph-section {
             margin-bottom: 4rem;
         }
         
-        .standings-week:last-of-type {
-            margin-bottom: 0;
-        }
-        
-        .week-header {
+        .section-header {
             display: flex;
             align-items: baseline;
+            justify-content: space-between;
             gap: 1rem;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
         
-        .week-header h2 {
+        .section-header h2 {
             font-family: 'Instrument Serif', Georgia, serif;
             font-size: 1.75rem;
             font-weight: 400;
             letter-spacing: -0.01em;
         }
         
-        .week-header time {
+        .section-header a {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        
+        .section-header a:hover {
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
+        
+        .section-meta {
             font-size: 0.9375rem;
             color: var(--text-muted);
-            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
         
         /* Grid */
@@ -366,6 +346,16 @@
             flex-shrink: 0;
         }
         
+        /* Coming Soon */
+        .coming-soon {
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
         /* FAQ Section */
         .faq-section {
             max-width: 800px;
@@ -459,7 +449,7 @@
                 padding: 2rem 1rem 3rem;
             }
             
-            .week-header {
+            .section-header {
                 flex-direction: column;
                 gap: 0.25rem;
             }
@@ -476,63 +466,116 @@
     <header class="site-header">
         <div class="header-content">
             <span class="season-badge">2025–26 Season</span>
-            <h1>NBA Standings Over Time</h1>
-            <p class="tagline">Weekly graphs tracking every team's win-loss record as it evolves throughout the season.</p>
+            <h1>Hoops Graphs</h1>
+            <p class="tagline">Simple NBA visualizations, updated weekly.</p>
         </div>
     </header>
     
     <main>
-        <!-- December 17, 2025 -->
-        <article class="standings-week" id="2025-12-17">
-            <header class="week-header">
-                <h2>Week 9</h2>
-                <time datetime="2025-12-17">December 17, 2025</time>
+        <!-- EAST VS WEST SECTION -->
+        <section class="graph-section">
+            <header class="section-header">
+                <h2>East vs West</h2>
+                <a href="/nba-east-vs-west">View all weeks →</a>
             </header>
+            <p class="section-meta">December 20, 2025</p>
+            
+            <article class="standings-card">
+                <figure>
+                    <a href="/nba-east-vs-west/2025-12-20.png" title="View full size NBA East vs West - December 20, 2025">
+                        <img 
+                            src="/nba-east-vs-west/2025-12-20.png" 
+                            alt="NBA East vs West Conference Battle December 20, 2025 - Shows cumulative inter-conference record throughout the 2025-26 NBA season"
+                            width="900"
+                            height="450"
+                            loading="eager"
+                        >
+                    </a>
+                    <figcaption class="card-footer">
+                        <p>Cumulative inter-conference record</p>
+                    </figcaption>
+                </figure>
+            </article>
+        </section>
+        
+        <!-- STANDINGS SECTION -->
+        <section class="graph-section">
+            <header class="section-header">
+                <h2>Standings Over Time</h2>
+                <a href="/nba-standings">View all weeks →</a>
+            </header>
+            <p class="section-meta">Week 10 · December 20, 2025</p>
             
             <div class="standings-grid">
                 <article class="standings-card">
                     <figure>
-                        <a href="/nba-standings/eastern-conference/2025-12-17.png" title="View full size NBA Eastern Conference Standings Graph - December 17, 2025">
+                        <a href="/nba-standings/eastern-conference/2025-12-20.png" title="View full size NBA Eastern Conference Standings Graph - December 20, 2025">
                             <div class="card-header">
                                 <h3>Eastern Conference</h3>
                                 <span class="conference-badge east">East</span>
                             </div>
                             <img 
-                                src="/nba-standings/eastern-conference/2025-12-17.png" 
-                                alt="NBA Eastern Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams including Celtics, Bucks, 76ers, Knicks, Heat, Cavaliers, Hawks, Bulls, Nets, Raptors, Hornets, Wizards, Magic, Pacers, and Pistons through the 2025-26 NBA season"
+                                src="/nba-standings/eastern-conference/2025-12-20.png" 
+                                alt="NBA Eastern Conference Cumulative Standings Graph December 20, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams including Celtics, Bucks, 76ers, Knicks, Heat, Cavaliers, Hawks, Bulls, Nets, Raptors, Hornets, Wizards, Magic, Pacers, and Pistons through the 2025-26 NBA season"
                                 width="1200"
                                 height="800"
-                                loading="eager"
+                                loading="lazy"
                             >
                         </a>
                         <figcaption class="card-footer">
-                            <p>Games over .500 through 27 games played</p>
+                            <p>Games over .500 through ~30 games played</p>
                         </figcaption>
                     </figure>
                 </article>
                 
                 <article class="standings-card">
                     <figure>
-                        <a href="/nba-standings/western-conference/2025-12-17.png" title="View full size NBA Western Conference Standings Graph - December 17, 2025">
+                        <a href="/nba-standings/western-conference/2025-12-20.png" title="View full size NBA Western Conference Standings Graph - December 20, 2025">
                             <div class="card-header">
                                 <h3>Western Conference</h3>
                                 <span class="conference-badge west">West</span>
                             </div>
                             <img 
-                                src="/nba-standings/western-conference/2025-12-17.png" 
-                                alt="NBA Western Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Western Conference teams including Lakers, Warriors, Suns, Clippers, Kings, Nuggets, Timberwolves, Thunder, Pelicans, Grizzlies, Spurs, Mavericks, Rockets, Jazz, and Trail Blazers through the 2025-26 NBA season"
+                                src="/nba-standings/western-conference/2025-12-20.png" 
+                                alt="NBA Western Conference Cumulative Standings Graph December 20, 2025 - Shows win-loss record progression for all 15 Western Conference teams including Lakers, Warriors, Suns, Clippers, Kings, Nuggets, Timberwolves, Thunder, Pelicans, Grizzlies, Spurs, Mavericks, Rockets, Jazz, and Trail Blazers through the 2025-26 NBA season"
                                 width="1200"
                                 height="800"
-                                loading="eager"
+                                loading="lazy"
                             >
                         </a>
                         <figcaption class="card-footer">
-                            <p>Games over .500 through 27 games played</p>
+                            <p>Games over .500 through ~30 games played</p>
                         </figcaption>
-                            </figure>
-                        </article>
-                    </div>
+                    </figure>
                 </article>
+            </div>
+        </section>
+        
+        <!-- HEAD-TO-HEAD SECTION -->
+        <section class="graph-section">
+            <header class="section-header">
+                <h2>Head-to-Head Records</h2>
+                <a href="/nba-head-to-head">View all weeks →</a>
+            </header>
+            <p class="section-meta">December 20, 2025</p>
+            
+            <article class="standings-card">
+                <figure>
+                    <a href="/nba-head-to-head/2025-12-20.png" title="View full size NBA Head-to-Head Records - December 20, 2025">
+                        <img 
+                            src="/nba-head-to-head/2025-12-20.png" 
+                            alt="NBA Head-to-Head Records Heatmap December 20, 2025 - Shows every team's record against every other team in the 2025-26 NBA season"
+                            width="1000"
+                            height="1000"
+                            loading="lazy"
+                        >
+                    </a>
+                    <figcaption class="card-footer">
+                        <p>Every team vs every team</p>
+                    </figcaption>
+                </figure>
+            </article>
+        </section>
         
         <!-- FAQ Section -->
         <section class="faq-section">
@@ -549,48 +592,19 @@
             </details>
             
             <details class="faq-item">
-                <summary>How often are these standings graphs updated?</summary>
-                <p>We update the NBA standings graphs weekly, typically on Tuesdays. This cadence captures meaningful movement in the standings while keeping the archive manageable. Each week's snapshot is preserved so you can see how the season unfolded over time.</p>
+                <summary>How often are these graphs updated?</summary>
+                <p>We update all NBA graphs weekly, typically on Tuesdays. This cadence captures meaningful movement in the standings while keeping the archive manageable. Each week's snapshot is preserved so you can see how the season unfolded over time.</p>
             </details>
             
             <details class="faq-item">
-                <summary>Why track standings over time instead of just current standings?</summary>
-                <p>Current standings only tell you where teams are right now. Tracking standings over time reveals the journey—a team in 6th place might be surging from 12th, or collapsing from 2nd. Context matters for understanding playoff races, trade deadline decisions, and which teams are truly trending in the right direction.</p>
-            </details>
-            
-            <details class="faq-item">
-                <summary>Can I view historical NBA standings from past seasons?</summary>
-                <p>Currently we're tracking the 2025-26 NBA season. Historical season archives are planned for future updates. Each week's graph is preserved, so by season's end you'll have a complete visual history of how the standings evolved.</p>
+                <summary>Which conference is better, East or West?</summary>
+                <p>Our East vs West graph tracks this throughout the season by showing the cumulative inter-conference record. Check the graph to see which conference is currently winning the head-to-head battle.</p>
             </details>
         </section>
-        
-        <!-- 
-        ============================================================
-        HOW TO ADD NEW WEEKLY STANDINGS:
-        ============================================================
-        1. Copy new standings images to img/standings/ with names:
-           - nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png
-           - nba-western-conference-cumulative-standings-YYYY-MM-DD.png
-        
-        2. Copy the <article class="standings-week"> block above
-        
-        3. Paste it ABOVE the previous week (newest first)
-        
-        4. Update:
-           - id="YYYY-MM-DD"
-           - Week number in h2
-           - datetime and visible date
-           - All image src and href paths
-           - Alt text dates
-           - Figcaption description (games played count)
-        
-        5. Update Schema.org JSON-LD in <head> to add new images
-        ============================================================
-        -->
     </main>
     
     <footer class="site-footer">
-        <p class="footer-brand">NBA Standings Over Time</p>
+        <p class="footer-brand">Hoops Graphs</p>
         <p>Updated weekly throughout the 2025–26 season</p>
     </footer>
     

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://plausible.io/js/pa-XY_KuMczzKVAMMReewoJH.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>NBA Standings Over Time | 2025-26 Season History</title>
+    <meta name="description" content="Complete archive of NBA standings graphs for the 2025-26 season. Track how Eastern and Western Conference standings evolved week by week.">
+    <meta name="keywords" content="NBA standings over time, NBA standings history, NBA cumulative standings, Eastern Conference standings, Western Conference standings, NBA 2025-26 season">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://hoopsgraphs.com/nba-standings">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hoopsgraphs.com/nba-standings">
+    <meta property="og:title" content="NBA Standings Over Time | 2025-26 Season History">
+    <meta property="og:description" content="Complete archive of NBA standings graphs. Track how Eastern and Western Conference standings evolved week by week.">
+    <meta property="og:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-24.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NBA Standings Over Time | 2025-26 Season History">
+    <meta name="twitter:description" content="Complete archive of NBA standings graphs for the 2025-26 season.">
+    <meta name="twitter:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/2025-12-24.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-page: #f8f6f3;
+            --bg-card: #ffffff;
+            --bg-header: #1a1a1a;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --text-inverse: #f8f6f3;
+            --accent-east: #c41e3a;
+            --accent-west: #0057b8;
+            --border-light: #e8e6e3;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        .site-header {
+            background: var(--bg-header);
+            color: var(--text-inverse);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        
+        .header-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .site-header h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        
+        .site-header .tagline {
+            font-size: 1rem;
+            color: rgba(248, 246, 243, 0.7);
+        }
+        
+        .breadcrumb {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        
+        .standings-week {
+            margin-bottom: 3rem;
+        }
+        
+        .week-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .week-header h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .week-header time {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .standings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .standings-grid { grid-template-columns: 1fr; }
+        }
+        
+        .standings-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+        
+        .standings-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .standings-card figure { margin: 0; }
+        
+        .standings-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .card-header h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+        
+        .conference-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        
+        .conference-badge.east {
+            background: rgba(196, 30, 58, 0.1);
+            color: var(--accent-east);
+        }
+        
+        .conference-badge.west {
+            background: rgba(0, 87, 184, 0.1);
+            color: var(--accent-west);
+        }
+        
+        .conference-badge::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        .standings-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .card-footer {
+            padding: 0.75rem 1rem;
+            background: #fafaf9;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+        
+        .site-footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-card);
+        }
+        
+        .site-footer p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .site-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <h1>NBA Standings Over Time</h1>
+            <p class="tagline">Complete archive of weekly standings graphs for the 2025–26 season</p>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a> → Standings
+    </nav>
+    
+    <main>
+        <!-- Week 10: December 24, 2025 -->
+        <article class="standings-week" id="2025-12-24">
+            <header class="week-header">
+                <h2>Week 10</h2>
+                <time datetime="2025-12-24">December 24, 2025</time>
+            </header>
+            
+            <div class="standings-grid">
+                <article class="standings-card">
+                    <figure>
+                        <a href="/nba-standings/eastern-conference/2025-12-24.png" title="View full size">
+                            <div class="card-header">
+                                <h3>Eastern Conference</h3>
+                                <span class="conference-badge east">East</span>
+                            </div>
+                            <img 
+                                src="/nba-standings/eastern-conference/2025-12-24.png" 
+                                alt="NBA Eastern Conference Cumulative Standings Graph December 24, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="lazy"
+                            >
+                        </a>
+                        <figcaption class="card-footer">
+                            Games over .500 through ~30 games played
+                        </figcaption>
+                    </figure>
+                </article>
+                
+                <article class="standings-card">
+                    <figure>
+                        <a href="/nba-standings/western-conference/2025-12-24.png" title="View full size">
+                            <div class="card-header">
+                                <h3>Western Conference</h3>
+                                <span class="conference-badge west">West</span>
+                            </div>
+                            <img 
+                                src="/nba-standings/western-conference/2025-12-24.png" 
+                                alt="NBA Western Conference Cumulative Standings Graph December 24, 2025 - Shows win-loss record progression for all 15 Western Conference teams through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="lazy"
+                            >
+                        </a>
+                        <figcaption class="card-footer">
+                            Games over .500 through ~30 games played
+                        </figcaption>
+                    </figure>
+                </article>
+            </div>
+        </article>
+        
+        <!-- Week 9: December 17, 2025 -->
+        <article class="standings-week" id="2025-12-17">
+            <header class="week-header">
+                <h2>Week 9</h2>
+                <time datetime="2025-12-17">December 17, 2025</time>
+            </header>
+            
+            <div class="standings-grid">
+                <article class="standings-card">
+                    <figure>
+                        <a href="/nba-standings/eastern-conference/2025-12-17.png" title="View full size">
+                            <div class="card-header">
+                                <h3>Eastern Conference</h3>
+                                <span class="conference-badge east">East</span>
+                            </div>
+                            <img 
+                                src="/nba-standings/eastern-conference/2025-12-17.png" 
+                                alt="NBA Eastern Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Eastern Conference teams through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="lazy"
+                            >
+                        </a>
+                        <figcaption class="card-footer">
+                            Games over .500 through 27 games played
+                        </figcaption>
+                    </figure>
+                </article>
+                
+                <article class="standings-card">
+                    <figure>
+                        <a href="/nba-standings/western-conference/2025-12-17.png" title="View full size">
+                            <div class="card-header">
+                                <h3>Western Conference</h3>
+                                <span class="conference-badge west">West</span>
+                            </div>
+                            <img 
+                                src="/nba-standings/western-conference/2025-12-17.png" 
+                                alt="NBA Western Conference Cumulative Standings Graph December 17, 2025 - Shows win-loss record progression for all 15 Western Conference teams through the 2025-26 NBA season"
+                                width="1200"
+                                height="800"
+                                loading="lazy"
+                            >
+                        </a>
+                        <figcaption class="card-footer">
+                            Games over .500 through 27 games played
+                        </figcaption>
+                    </figure>
+                </article>
+            </div>
+        </article>
+        
+        <!-- Add new weeks ABOVE this comment, newest first -->
+    </main>
+    
+    <footer class="site-footer">
+        <p><a href="/">← Back to Home</a></p>
+    </footer>
+</body>
+</html>
+

@@ -1,5 +1,3 @@
-from src.scrape.team_wins_losses import get_team_wins_losses_cached
-
 # NBA team abbreviations (as used by ESPN) with metadata
 # Colors optimized for visibility on dark backgrounds, using official team colors
 TEAMS = {
@@ -39,6 +37,8 @@ TEAMS = {
 
 
 if __name__ == "__main__":
+    from src.scrape.team_wins_losses import get_team_wins_losses_cached
+
     for team in TEAMS.keys():
         try:
             print(f"Scraping {team}...")

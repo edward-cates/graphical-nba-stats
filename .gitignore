@@ -146,3 +146,5 @@ cython_debug/
 Thumbs.db
 .teams/
 .standings/
+.head_to_head/
+.conference_battle/

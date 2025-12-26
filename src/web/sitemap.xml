@@ -32,7 +32,7 @@
   
   <!-- Standings Archive -->
   <url>
-    <loc>https://hoopsgraphs.com/nba-standings</loc>
+    <loc>https://hoopsgraphs.com/nba-standings/</loc>
     <lastmod>2025-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -60,7 +60,7 @@
   
   <!-- Head-to-Head Archive -->
   <url>
-    <loc>https://hoopsgraphs.com/nba-head-to-head</loc>
+    <loc>https://hoopsgraphs.com/nba-head-to-head/</loc>
     <lastmod>2025-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -73,7 +73,7 @@
   
   <!-- East vs West Archive -->
   <url>
-    <loc>https://hoopsgraphs.com/nba-east-vs-west</loc>
+    <loc>https://hoopsgraphs.com/nba-east-vs-west/</loc>
     <lastmod>2025-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

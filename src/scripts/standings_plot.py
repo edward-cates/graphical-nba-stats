@@ -193,11 +193,12 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
         xanchor="left",
     )
 
-    # Subtitle
+    # Subtitle with date
+    today_str = datetime.now().strftime("%B %d, %Y")
     fig.add_annotation(
         x=0.0, y=1.005,
         xref="paper", yref="paper",
-        text="2025-26 Season · Cumulative Record",
+        text=f"2025-26 Season · Cumulative Record · {today_str}",
         showarrow=False,
         font=dict(size=16, color=muted_text),
         xanchor="left",

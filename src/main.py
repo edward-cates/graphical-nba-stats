@@ -28,6 +28,15 @@ CACHE_HEADERS = {"Cache-Control": "public, max-age=31536000, immutable"}
 # STANDINGS - Eastern Conference
 # =============================================================================
 
+@app.get("/nba-standings/eastern-conference/2026-01-14.png")
+async def standings_east_2026_01_14():
+    return FileResponse(
+        "img/standings/nba-eastern-conference-cumulative-standings-2026-01-14.png",
+        media_type="image/png",
+        headers=CACHE_HEADERS,
+    )
+
+
 @app.get("/nba-standings/eastern-conference/2026-01-07.png")
 async def standings_east_2026_01_07():
     return FileResponse(
@@ -67,6 +76,15 @@ async def standings_east_2025_12_17():
 # =============================================================================
 # STANDINGS - Western Conference
 # =============================================================================
+
+@app.get("/nba-standings/western-conference/2026-01-14.png")
+async def standings_west_2026_01_14():
+    return FileResponse(
+        "img/standings/nba-western-conference-cumulative-standings-2026-01-14.png",
+        media_type="image/png",
+        headers=CACHE_HEADERS,
+    )
+
 
 @app.get("/nba-standings/western-conference/2026-01-07.png")
 async def standings_west_2026_01_07():
@@ -108,6 +126,15 @@ async def standings_west_2025_12_17():
 # HEAD-TO-HEAD
 # =============================================================================
 
+@app.get("/nba-head-to-head/2026-01-14.png")
+async def head_to_head_2026_01_14():
+    return FileResponse(
+        "img/head-to-head/nba-head-to-head-2026-01-14.png",
+        media_type="image/png",
+        headers=CACHE_HEADERS,
+    )
+
+
 @app.get("/nba-head-to-head/2026-01-07.png")
 async def head_to_head_2026_01_07():
     return FileResponse(
@@ -138,6 +165,15 @@ async def head_to_head_2025_12_24():
 # =============================================================================
 # EAST VS WEST
 # =============================================================================
+
+@app.get("/nba-east-vs-west/2026-01-14.png")
+async def east_vs_west_2026_01_14():
+    return FileResponse(
+        "img/east-vs-west/nba-east-vs-west-2026-01-14.png",
+        media_type="image/png",
+        headers=CACHE_HEADERS,
+    )
+
 
 @app.get("/nba-east-vs-west/2026-01-07.png")
 async def east_vs_west_2026_01_07():

@@ -8,6 +8,7 @@ Simple NBA visualizations that inexplicably don't exist anywhere online—Google
 - **Never change existing URLs**: Once an image is published, its URL is frozen forever. Existing images already rank in Google Image Search.
 - **Dated snapshots**: All graphs are weekly snapshots with dates in filenames. We preserve history, never overwrite.
 - **SEO-friendly naming**: Filenames and URLs contain keywords people actually search for.
+- **Stable `/latest` URLs**: Each graph type has a `/latest.png` URL that always serves the current week's image. These accumulate SEO value over time as stable entry points.
 
 ## Site Structure
 
@@ -41,6 +42,8 @@ make standings-west
 **SEO URLs:**
 - `https://hoopsgraphs.com/nba-standings/eastern-conference/YYYY-MM-DD.png`
 - `https://hoopsgraphs.com/nba-standings/western-conference/YYYY-MM-DD.png`
+- `https://hoopsgraphs.com/nba-standings/eastern-conference/latest.png` (always current)
+- `https://hoopsgraphs.com/nba-standings/western-conference/latest.png` (always current)
 
 ### 2. Head-to-Head
 
@@ -55,7 +58,9 @@ make head-to-head
 
 **Copy to:** `img/head-to-head/nba-head-to-head-YYYY-MM-DD.png`
 
-**SEO URL:** `https://hoopsgraphs.com/nba-head-to-head/YYYY-MM-DD.png`
+**SEO URLs:**
+- `https://hoopsgraphs.com/nba-head-to-head/YYYY-MM-DD.png`
+- `https://hoopsgraphs.com/nba-head-to-head/latest.png` (always current)
 
 ### 3. East vs West
 
@@ -70,7 +75,9 @@ make east-vs-west
 
 **Copy to:** `img/east-vs-west/nba-east-vs-west-YYYY-MM-DD.png`
 
-**SEO URL:** `https://hoopsgraphs.com/nba-east-vs-west/YYYY-MM-DD.png`
+**SEO URLs:**
+- `https://hoopsgraphs.com/nba-east-vs-west/YYYY-MM-DD.png`
+- `https://hoopsgraphs.com/nba-east-vs-west/latest.png` (always current)
 
 ## Weekly Update Workflow
 
@@ -96,7 +103,7 @@ cp .conference_battle/conference_battle.png img/east-vs-west/nba-east-vs-west-YY
 
 ### 3. Add hardcoded routes to `src/main.py`
 
-For each new image, add an explicit route:
+For each new image, add an explicit dated route:
 
 ```python
 @app.get("/nba-standings/eastern-conference/YYYY-MM-DD.png")
@@ -104,18 +111,34 @@ async def standings_east_YYYY_MM_DD():
     return FileResponse("img/standings/nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png", ...)
 ```
 
-### 4. Update HTML pages
+### 4. Update `/latest` routes in `src/main.py`
 
-- `src/web/index.html` — Update current week dashboard
+Update the 4 `/latest` routes to point to the new week's images:
+
+```python
+@app.get("/nba-standings/eastern-conference/latest.png")
+async def standings_east_latest():
+    return FileResponse(
+        "img/standings/nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png",  # ← Update date
+        media_type="image/png",
+    )
+```
+
+Do the same for `western-conference/latest.png`, `nba-head-to-head/latest.png`, and `nba-east-vs-west/latest.png`.
+
+### 5. Update HTML archive pages
+
 - `src/web/nba-standings.html` — Add new week to standings archive
 - `src/web/nba-head-to-head.html` — Add new week to head-to-head archive
 - `src/web/nba-east-vs-west.html` — Add new week to east-vs-west archive
 
-### 5. Update `src/web/sitemap.xml`
+**Note:** `index.html` uses `/latest` URLs and doesn't need weekly updates.
 
-Add `<image:image>` entries for all new images under the appropriate `<url>`. Update `<lastmod>` to today's date.
+### 6. Update `src/web/sitemap.xml`
 
-### 6. Deploy
+Add `<image:image>` entries for all new dated images under the appropriate `<url>`. Update `<lastmod>` to today's date. (The `/latest` URLs are already in the sitemap and don't need weekly updates.)
+
+### 7. Deploy
 
 ```bash
 git add -A
@@ -131,7 +154,8 @@ git push heroku main
 ## SEO Checklist
 
 - [ ] All new images copied with SEO filenames
-- [ ] Hardcoded routes added to `main.py`
-- [ ] Sitemap updated with new images (under correct page URL)
+- [ ] Hardcoded dated routes added to `main.py`
+- [ ] `/latest` routes updated to point to new week's images
+- [ ] Sitemap updated with new dated images (under correct page URL)
 - [ ] Alt text includes date and graph type
-- [ ] All HTML pages updated with new graphs
+- [ ] Archive HTML pages updated with new graphs

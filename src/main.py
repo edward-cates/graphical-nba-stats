@@ -235,6 +235,11 @@ async def sitemap():
     return FileResponse("src/web/sitemap.xml", media_type="application/xml")
 
 
+@app.get("/robots.txt")
+async def robots():
+    return FileResponse("src/web/robots.txt", media_type="text/plain")
+
+
 @app.get("/hello-world")
 async def hello_world():
     return "hi"

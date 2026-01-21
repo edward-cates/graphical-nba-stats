@@ -28,6 +28,27 @@
       <image:title>NBA East vs West Conference Battle - January 14, 2026</image:title>
       <image:caption>Graph showing cumulative inter-conference record between East and West through January 14, 2026</image:caption>
     </image:image>
+    <!-- Latest URLs (stable entry points, always redirect to current week) -->
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/latest.png</image:loc>
+      <image:title>NBA Eastern Conference Standings Over Time - Latest</image:title>
+      <image:caption>Current NBA Eastern Conference standings graph, updated weekly</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/western-conference/latest.png</image:loc>
+      <image:title>NBA Western Conference Standings Over Time - Latest</image:title>
+      <image:caption>Current NBA Western Conference standings graph, updated weekly</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-head-to-head/latest.png</image:loc>
+      <image:title>NBA Head-to-Head Records - Latest</image:title>
+      <image:caption>Current NBA head-to-head records heatmap, updated weekly</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-east-vs-west/latest.png</image:loc>
+      <image:title>NBA East vs West Conference Battle - Latest</image:title>
+      <image:caption>Current NBA inter-conference record graph, updated weekly</image:caption>
+    </image:image>
   </url>
   
   <!-- Standings Archive -->

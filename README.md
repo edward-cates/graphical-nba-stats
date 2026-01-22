@@ -126,13 +126,16 @@ async def standings_east_latest():
 
 Do the same for `western-conference/latest.png`, `nba-head-to-head/latest.png`, and `nba-east-vs-west/latest.png`.
 
-### 5. Update HTML archive pages
+### 5. Update HTML pages
 
-- `src/web/nba-standings.html` — Add new week to standings archive
-- `src/web/nba-head-to-head.html` — Add new week to head-to-head archive
-- `src/web/nba-east-vs-west.html` — Add new week to east-vs-west archive
+**Archive pages** (add new week entry):
+- `src/web/nba-standings.html`
+- `src/web/nba-head-to-head.html`
+- `src/web/nba-east-vs-west.html`
 
-**Note:** `index.html` uses `/latest` URLs and doesn't need weekly updates.
+**Homepage** (`src/web/index.html`):
+- Update the 3 date strings in `section-meta` elements (e.g., "Week 14 · January 21, 2026")
+- Images use `/latest` URLs so they update automatically
 
 ### 6. Update `src/web/sitemap.xml`
 
@@ -156,6 +159,6 @@ git push heroku main
 - [ ] All new images copied with SEO filenames
 - [ ] Hardcoded dated routes added to `main.py`
 - [ ] `/latest` routes updated to point to new week's images
-- [ ] Sitemap updated with new dated images (under correct page URL)
-- [ ] Alt text includes date and graph type
+- [ ] `index.html` date strings updated (3 section-meta elements)
 - [ ] Archive HTML pages updated with new graphs
+- [ ] Sitemap updated with new dated images (under correct page URL)

@@ -236,9 +236,10 @@ def generate_conference_battle_plot(output_dir: Path = Path(".conference_battle"
     )
 
     # Text watermarks - EAST at top, WEST at bottom, both centered
+    # Use "y domain" so they stay at top/bottom of plot area regardless of data values
     fig.add_annotation(
         x=0.5, y=0.97,
-        xref="paper", yref="paper",
+        xref="paper", yref="y domain",
         text="EAST",
         showarrow=False,
         font=dict(size=40, color=east_color, family="Arial Black, Arial, sans-serif"),
@@ -249,7 +250,7 @@ def generate_conference_battle_plot(output_dir: Path = Path(".conference_battle"
     
     fig.add_annotation(
         x=0.5, y=0.03,
-        xref="paper", yref="paper",
+        xref="paper", yref="y domain",
         text="WEST",
         showarrow=False,
         font=dict(size=40, color=west_color, family="Arial Black, Arial, sans-serif"),

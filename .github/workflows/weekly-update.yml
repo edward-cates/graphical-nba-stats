@@ -1,0 +1,64 @@
+name: Weekly NBA Update
+
+on:
+  schedule:
+    - cron: '0 14 * * 2' # Tuesdays at 2pm UTC (8am CST)
+  workflow_dispatch: # allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  weekly-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate East standings
+        run: python -m src.scripts.standings_plot east
+
+      - name: Generate West standings
+        run: python -m src.scripts.standings_plot west
+
+      - name: Generate head-to-head
+        run: python -m src.scripts.head_to_head_plot
+
+      - name: Generate east-vs-west
+        run: python -m src.scripts.conference_battle_plot
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update site with Claude Code
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p \
+            "Follow the 'Weekly Update Workflow' in README.md, starting from step 2.
+            Step 1 is already done — the graphs have been generated in their output locations.
+
+            Today's date is $(date +%Y-%m-%d).
+
+            Do the following:
+            1. Copy generated images from their output locations to img/ with SEO filenames using today's date
+            2. Add new hardcoded routes to src/main.py following the exact pattern of existing routes
+            3. Update all 4 /latest routes in src/main.py to point to today's images
+            4. Update the 3 archive HTML pages with new week entries
+            5. Update homepage index.html date strings
+            6. Update sitemap.xml with new dated image entries and lastmod dates
+            7. Git add the new and modified files, commit with a message like 'Add week N graphs' (determine N from recent commits), and push to origin main
+
+            If anything looks wrong or unexpected, exit with a non-zero exit code and a clear error message. Do not guess or improvise if the file structures don't match what you expect." \
+            --allowedTools "Bash(command)" "Read(file_path)" "Edit(file_path,old_string,new_string)" "Write(file_path,content)" "Glob(pattern)" "Grep(pattern)"

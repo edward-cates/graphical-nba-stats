@@ -536,19 +536,19 @@ async def root():
         return f.read()
 
 
-@app.get("/nba-standings", response_class=HTMLResponse)
+@app.get("/nba-standings/", response_class=HTMLResponse)
 async def nba_standings():
     with open("src/web/nba-standings.html", "r") as f:
         return f.read()
 
 
-@app.get("/nba-head-to-head", response_class=HTMLResponse)
+@app.get("/nba-head-to-head/", response_class=HTMLResponse)
 async def nba_head_to_head():
     with open("src/web/nba-head-to-head.html", "r") as f:
         return f.read()
 
 
-@app.get("/nba-east-vs-west", response_class=HTMLResponse)
+@app.get("/nba-east-vs-west/", response_class=HTMLResponse)
 async def nba_east_vs_west():
     with open("src/web/nba-east-vs-west.html", "r") as f:
         return f.read()

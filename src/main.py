@@ -37,15 +37,6 @@ async def standings_east_2026_04_19():
     )
 
 
-@app.get("/nba-standings/eastern-conference/2026-04-14.png")
-async def standings_east_2026_04_14():
-    return FileResponse(
-        "img/standings/nba-eastern-conference-cumulative-standings-2026-04-14.png",
-        media_type="image/png",
-        headers=CACHE_HEADERS,
-    )
-
-
 @app.get("/nba-standings/eastern-conference/2026-04-07.png")
 async def standings_east_2026_04_07():
     return FileResponse(
@@ -207,15 +198,6 @@ async def standings_east_2025_12_17():
 async def standings_west_2026_04_19():
     return FileResponse(
         "img/standings/nba-western-conference-cumulative-standings-2026-04-19.png",
-        media_type="image/png",
-        headers=CACHE_HEADERS,
-    )
-
-
-@app.get("/nba-standings/western-conference/2026-04-14.png")
-async def standings_west_2026_04_14():
-    return FileResponse(
-        "img/standings/nba-western-conference-cumulative-standings-2026-04-14.png",
         media_type="image/png",
         headers=CACHE_HEADERS,
     )
@@ -387,15 +369,6 @@ async def head_to_head_2026_04_19():
     )
 
 
-@app.get("/nba-head-to-head/2026-04-14.png")
-async def head_to_head_2026_04_14():
-    return FileResponse(
-        "img/head-to-head/nba-head-to-head-2026-04-14.png",
-        media_type="image/png",
-        headers=CACHE_HEADERS,
-    )
-
-
 @app.get("/nba-head-to-head/2026-04-07.png")
 async def head_to_head_2026_04_07():
     return FileResponse(
@@ -548,15 +521,6 @@ async def head_to_head_2025_12_24():
 async def east_vs_west_2026_04_19():
     return FileResponse(
         "img/east-vs-west/nba-east-vs-west-2026-04-19.png",
-        media_type="image/png",
-        headers=CACHE_HEADERS,
-    )
-
-
-@app.get("/nba-east-vs-west/2026-04-14.png")
-async def east_vs_west_2026_04_14():
-    return FileResponse(
-        "img/east-vs-west/nba-east-vs-west-2026-04-14.png",
         media_type="image/png",
         headers=CACHE_HEADERS,
     )

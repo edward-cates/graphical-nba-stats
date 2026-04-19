@@ -148,3 +148,5 @@ Thumbs.db
 .standings/
 .head_to_head/
 .conference_battle/
+.bracket/
+.claude/

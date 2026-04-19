@@ -707,6 +707,24 @@ async def east_vs_west_latest():
 
 
 # =============================================================================
+# PLAYOFF BRACKET (prototype, not in production sitemap)
+# =============================================================================
+
+@app.get("/nba-playoff-bracket/latest.png")
+async def playoff_bracket_latest():
+    return FileResponse(
+        "img/playoff-bracket/latest.png",
+        media_type="image/png",
+    )
+
+
+@app.get("/nba-playoff-bracket/", response_class=HTMLResponse)
+async def playoff_bracket_page():
+    with open("src/web/nba-playoff-bracket.html", "r") as f:
+        return f.read()
+
+
+# =============================================================================
 # PAGE ROUTES
 # =============================================================================
 

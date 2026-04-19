@@ -1,4 +1,4 @@
-.PHONY: lint up scrape scrape-all standings-east standings-west head-to-head east-vs-west
+.PHONY: lint up scrape scrape-all standings-east standings-west head-to-head east-vs-west playoff-bracket
 
 PYTHON := $(shell conda run -n nba which python)
 
@@ -33,4 +33,10 @@ head-to-head:
 
 east-vs-west:
 	@python -m src.scripts.conference_battle_plot
+
+playoff-bracket:
+	@python -m src.scripts.playoff_bracket_plot
+	@mkdir -p img/playoff-bracket
+	@cp .bracket/playoff_bracket.png img/playoff-bracket/latest.png
+	@echo "\033[32m✓ wrote img/playoff-bracket/latest.png\033[0m"
 

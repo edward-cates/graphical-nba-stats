@@ -12,9 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO Meta Tags -->
-    <title>NBA Graphs & Charts | Standings, Head-to-Head, East vs West | 2025-26</title>
-    <meta name="description" content="NBA visualizations updated weekly: standings over time, head-to-head records, and East vs West conference battle. Clean graphs for the 2025-26 season.">
-    <meta name="keywords" content="NBA standings over time, NBA head to head, NBA east vs west, NBA graphs, NBA charts, NBA 2025-26 season, Eastern Conference, Western Conference">
+    <title>NBA Graphs & Charts | Playoff Bracket, Standings, Head-to-Head, East vs West | 2025-26</title>
+    <meta name="description" content="NBA visualizations updated weekly: playoff bracket with regular-season head-to-head records, standings over time, head-to-head, and East vs West conference battle. Clean graphs for the 2025-26 season.">
+    <meta name="keywords" content="NBA playoff bracket, NBA playoffs regular season head to head, NBA standings over time, NBA head to head, NBA east vs west, NBA graphs, NBA charts, NBA 2025-26 season, Eastern Conference, Western Conference">
     <meta name="author" content="Hoops Graphs">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://hoopsgraphs.com/">
@@ -23,7 +23,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hoopsgraphs.com/">
     <meta property="og:title" content="NBA Graphs & Charts | 2025-26 Season">
-    <meta property="og:description" content="NBA visualizations updated weekly: standings over time, head-to-head records, and East vs West conference battle.">
+    <meta property="og:description" content="NBA visualizations updated weekly: playoff bracket with regular-season head-to-head records, standings over time, head-to-head, and East vs West.">
     <meta property="og:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/latest.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="800">
@@ -31,7 +31,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NBA Graphs & Charts | 2025-26 Season">
-    <meta name="twitter:description" content="NBA visualizations updated weekly: standings, head-to-head, and conference battle.">
+    <meta name="twitter:description" content="NBA visualizations updated weekly: playoff bracket with regular-season H2H, standings, head-to-head, and conference battle.">
     <meta name="twitter:image" content="https://hoopsgraphs.com/nba-standings/eastern-conference/latest.png">
     
     <!-- Schema.org Structured Data -->
@@ -51,6 +51,14 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What does the playoff bracket show for each matchup?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Every box on our NBA playoff bracket shows the two teams' regular-season head-to-head record — for example, if Team A won the regular-season series 3-1, that is the number displayed. For rounds that haven't been played yet, we project the bracket forward by advancing whichever team won the regular-season series."
+                }
+            },
             {
                 "@type": "Question",
                 "name": "How do NBA standings change over time during a season?",
@@ -472,6 +480,32 @@
     </header>
     
     <main>
+        <!-- PLAYOFF BRACKET SECTION -->
+        <section class="graph-section">
+            <header class="section-header">
+                <h2>Playoff Bracket</h2>
+                <a href="/nba-playoff-bracket/">Full size →</a>
+            </header>
+            <p class="section-meta">2025–26 playoffs · regular-season head-to-head per matchup</p>
+
+            <article class="standings-card">
+                <figure>
+                    <a href="/nba-playoff-bracket/latest.png" title="View full size NBA Playoff Bracket">
+                        <img
+                            src="/nba-playoff-bracket/latest.png"
+                            alt="2025–26 NBA Playoff Bracket with regular-season head-to-head records - Shows every playoff matchup and the two teams' regular-season series result, with projected rounds based on regular-season H2H"
+                            width="1600"
+                            height="900"
+                            loading="eager"
+                        >
+                    </a>
+                    <figcaption class="card-footer">
+                        <p>Every matchup shows the two teams' regular-season head-to-head record. Rounds 2+ advance whichever team won the regular-season series.</p>
+                    </figcaption>
+                </figure>
+            </article>
+        </section>
+
         <!-- EAST VS WEST SECTION -->
         <section class="graph-section">
             <header class="section-header">
@@ -580,7 +614,12 @@
         <!-- FAQ Section -->
         <section class="faq-section">
             <h2>FAQ</h2>
-            
+
+            <details class="faq-item">
+                <summary>What does the playoff bracket show for each matchup?</summary>
+                <p>Every box on our NBA playoff bracket shows the two teams' regular-season head-to-head record — for example, if Team A won the regular-season series 3-1, that is the number displayed. For rounds that haven't been played yet, we project the bracket forward by advancing whichever team won the regular-season series.</p>
+            </details>
+
             <details class="faq-item">
                 <summary>How do NBA standings change over time during a season?</summary>
                 <p>NBA standings are highly dynamic, especially early in the season when a few wins or losses can dramatically shift a team's position. As the 82-game season progresses, standings tend to stabilize as sample sizes grow. These graphs capture that evolution, showing which teams started hot, which improved mid-season, and which faded down the stretch.</p>

@@ -1,0 +1,16 @@
+{
+  "season": "2025-26",
+  "note": "Edit this file weekly to update series status / round-1 matchups. Later rounds are projected from regular-season H2H automatically.",
+  "west_r1": [
+    {"seed_a": 1, "team_a": "okc", "seed_b": 8, "team_b": "phx", "note": "OKC leads 1-0"},
+    {"seed_a": 4, "team_a": "lal", "seed_b": 5, "team_b": "hou", "note": "LAL leads 1-0"},
+    {"seed_a": 3, "team_a": "den", "seed_b": 6, "team_b": "min", "note": "DEN leads 1-0"},
+    {"seed_a": 2, "team_a": "sa",  "seed_b": 7, "team_b": "por", "note": "Game 1 tonight"}
+  ],
+  "east_r1": [
+    {"seed_a": 1, "team_a": "det", "seed_b": 8, "team_b": "orl", "note": "Game 1 tonight"},
+    {"seed_a": 4, "team_a": "cle", "seed_b": 5, "team_b": "tor", "note": "CLE leads 1-0"},
+    {"seed_a": 3, "team_a": "ny",  "seed_b": 6, "team_b": "atl", "note": "NY leads 1-0"},
+    {"seed_a": 2, "team_a": "bos", "seed_b": 7, "team_b": "phi", "note": "BOS leads 1-0"}
+  ]
+}

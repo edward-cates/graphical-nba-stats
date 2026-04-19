@@ -9,6 +9,11 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-playoff-bracket/latest.png</image:loc>
+      <image:title>2025-26 NBA Playoff Bracket with Regular-Season Head-to-Head Records</image:title>
+      <image:caption>NBA playoff bracket showing every matchup's regular-season head-to-head record, with projected rounds based on the regular-season series winner</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/2026-04-19.png</image:loc>
       <image:title>NBA Eastern Conference Standings Over Time - April 19, 2026</image:title>
       <image:caption>Graph showing NBA Eastern Conference standings over time through April 19, 2026</image:caption>
@@ -290,7 +295,20 @@
       <image:caption>Current NBA inter-conference record graph, updated weekly</image:caption>
     </image:image>
   </url>
-  
+
+  <!-- Playoff Bracket -->
+  <url>
+    <loc>https://hoopsgraphs.com/nba-playoff-bracket/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-playoff-bracket/latest.png</image:loc>
+      <image:title>2025-26 NBA Playoff Bracket with Regular-Season Head-to-Head Records</image:title>
+      <image:caption>NBA playoff bracket showing every matchup's regular-season head-to-head record, with projected rounds based on the regular-season series winner</image:caption>
+    </image:image>
+  </url>
+
   <!-- Standings Archive -->
   <url>
     <loc>https://hoopsgraphs.com/nba-standings/</loc>

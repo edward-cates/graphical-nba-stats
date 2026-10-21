@@ -46,14 +46,14 @@ def insert_after_in_section(content: str, section_marker: str, after_tag: str, i
 
 def generate_graphs():
     targets = [
-        ("East standings", "standings-east"),
-        ("West standings", "standings-west"),
-        ("Head-to-head", "head-to-head"),
-        ("East vs West", "east-vs-west"),
+        ("East standings", ["src.scripts.standings_plot", "east"]),
+        ("West standings", ["src.scripts.standings_plot", "west"]),
+        ("Head-to-head", ["src.scripts.head_to_head_plot"]),
+        ("East vs West", ["src.scripts.conference_battle_plot"]),
     ]
-    for label, target in targets:
+    for label, module in targets:
         print(f"  {label}...")
-        result = subprocess.run(["make", target], cwd=ROOT, capture_output=True, text=True)
+        result = subprocess.run([sys.executable, "-m", *module], cwd=ROOT, capture_output=True, text=True)
         if result.returncode != 0:
             print(result.stdout, file=sys.stderr)
             print(result.stderr, file=sys.stderr)

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Weekly update on agent-box: render graphs, update the site, push to GitHub, deploy to app-host.
-# crontab: 0 14 * * 2 ~/code/heroku/graphical-nba-stats/bin/weekly_cron.sh >> ~/logs/hoopsgraphs.log 2>&1
+# Manual run from agent-box (the schedule lives in GitHub Actions): render graphs, update the site,
+# push to GitHub and deploy to app-host right away.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 echo "=== $(date -u +%FT%TZ)"
@@ -16,7 +16,7 @@ git config credential.helper '!f() { echo username=x-access-token; echo "passwor
 git pull -q --rebase origin main
 python scripts/weekly_update.py
 git add -A img src
-git commit -qm "Add week $(grep -oE '<h2>Week [0-9]+' src/web/nba-standings.html | head -1 | grep -oE '[0-9]+') graphs"
+git commit -qm "Add week $(grep -m1 -oE '<h2>Week [0-9]+' src/web/nba-standings.html | sed 's/.*Week //') graphs"
 git push -q origin main
 
 git -C ~/code/app-host pull -q --rebase

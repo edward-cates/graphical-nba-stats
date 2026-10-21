@@ -81,10 +81,13 @@ make east-vs-west
 
 ## Weekly Update Workflow
 
-Automated: agent-box runs `bin/weekly_cron.sh` every Tuesday 14:00 UTC (crontab). It runs
-`scripts/weekly_update.py` (render graphs, copy dated images, add routes/archive entries/sitemap
-images, point `/latest` at the new week), commits, pushes to GitHub and deploys with
-`~/code/app-host/deploy.sh nba`. Log: `~/logs/hoopsgraphs.log` on agent-box.
+Automated: `.github/workflows/weekly-update.yml` runs every Tuesday 14:00 UTC (matching "typically on
+Tuesdays" on the site). It runs `scripts/weekly_update.py` (render graphs, copy dated images, add
+routes/archive entries/sitemap images, point `/latest` at the new week) and commits to main.
+app-host deploys it: `~/code/app-host/autodeploy.sh` polls GitHub every 10 minutes and rebuilds
+when main moves (the box has no public SSH). Any push to main ships the same way.
+
+Manual run from agent-box: `bin/weekly_cron.sh` (same steps, then deploys immediately).
 
 Data comes from ESPN's schedule JSON (`site.api.espn.com/.../teams/<abbrev>/schedule`); the
 HTML schedule page returns an empty 202 to cloud IPs. Graphs render with plotly/kaleido, which

@@ -8,6 +8,7 @@ from pathlib import Path
 
 import plotly.graph_objects as go
 
+from src.season import season_label
 from src.scrape.teams import TEAMS
 from src.scrape.team_wins_losses import get_team_wins_losses_cached
 
@@ -198,7 +199,7 @@ def generate_standings_plot(conference: str, output_dir: Path = Path(".standings
     fig.add_annotation(
         x=0.0, y=1.005,
         xref="paper", yref="paper",
-        text=f"2025-26 Season · Cumulative Record · {today_str}",
+        text=f"{season_label()} Season · Cumulative Record · {today_str}",
         showarrow=False,
         font=dict(size=16, color=muted_text),
         xanchor="left",

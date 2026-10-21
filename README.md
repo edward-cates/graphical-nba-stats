@@ -81,73 +81,27 @@ make east-vs-west
 
 ## Weekly Update Workflow
 
-### 1. Generate all graphs
+Automated: agent-box runs `bin/weekly_cron.sh` every Tuesday 14:00 UTC (crontab). It runs
+`scripts/weekly_update.py` (render graphs, copy dated images, add routes/archive entries/sitemap
+images, point `/latest` at the new week), commits, pushes to GitHub and deploys with
+`~/code/app-host/deploy.sh nba`. Log: `~/logs/hoopsgraphs.log` on agent-box.
+
+Data comes from ESPN's schedule JSON (`site.api.espn.com/.../teams/<abbrev>/schedule`); the
+HTML schedule page returns an empty 202 to cloud IPs. Graphs render with plotly/kaleido, which
+needs Chrome: on the ARM box that's Playwright's Chromium (`uvx playwright install --with-deps chromium`).
+
+## New Season
+
+Run once before the first weekly update of a season:
 
 ```bash
-make standings-east
-make standings-west
-make head-to-head
-make east-vs-west
+python scripts/new_season.py 2025-26 2026-27
 ```
 
-### 2. Copy to `img/` with SEO filenames
-
-Use today's date (YYYY-MM-DD format):
-
-```bash
-cp .standings/east_standings.png img/standings/nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png
-cp .standings/west_standings.png img/standings/nba-western-conference-cumulative-standings-YYYY-MM-DD.png
-cp .head_to_head/head_to_head.png img/head-to-head/nba-head-to-head-YYYY-MM-DD.png
-cp .conference_battle/conference_battle.png img/east-vs-west/nba-east-vs-west-YYYY-MM-DD.png
-```
-
-### 3. Add hardcoded routes to `src/main.py`
-
-For each new image, add an explicit dated route:
-
-```python
-@app.get("/nba-standings/eastern-conference/YYYY-MM-DD.png")
-async def standings_east_YYYY_MM_DD():
-    return FileResponse("img/standings/nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png", ...)
-```
-
-### 4. Update `/latest` routes in `src/main.py`
-
-Update the 4 `/latest` routes to point to the new week's images:
-
-```python
-@app.get("/nba-standings/eastern-conference/latest.png")
-async def standings_east_latest():
-    return FileResponse(
-        "img/standings/nba-eastern-conference-cumulative-standings-YYYY-MM-DD.png",  # ← Update date
-        media_type="image/png",
-    )
-```
-
-Do the same for `western-conference/latest.png`, `nba-head-to-head/latest.png`, and `nba-east-vs-west/latest.png`.
-
-### 5. Update HTML pages
-
-**Archive pages** (add new week entry):
-- `src/web/nba-standings.html`
-- `src/web/nba-head-to-head.html`
-- `src/web/nba-east-vs-west.html`
-
-**Homepage** (`src/web/index.html`):
-- Update the 3 date strings in `section-meta` elements (e.g., "Week 14 · January 21, 2026")
-- Images use `/latest` URLs so they update automatically
-
-### 6. Update `src/web/sitemap.xml`
-
-Add `<image:image>` entries for all new dated images under the appropriate `<url>`. Update `<lastmod>` to today's date. (The `/latest` URLs are already in the sitemap and don't need weekly updates.)
-
-### 7. Deploy
-
-```bash
-git add -A
-git commit -m "Add week X graphs"
-git push heroku main
-```
+It copies each archive page to `/<page>/<old-season>/` (e.g. `/nba-standings/2025-26/`), empties
+the live pages, adds a "Past seasons" link, moves the old dated images to the archived pages in the
+sitemap, and drops the playoff bracket from the homepage. No image URL ever changes. Graph titles
+and alt text take the season from `src/season.py`.
 
 ## URLs
 

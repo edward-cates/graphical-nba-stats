@@ -9,6 +9,11 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from src.season import season_label  # noqa: E402
+
+SEASON = season_label()
 
 
 def fatal(msg: str):
@@ -53,6 +58,14 @@ def generate_graphs():
             print(result.stdout, file=sys.stderr)
             print(result.stderr, file=sys.stderr)
             fatal(f"Graph generation failed: {label}")
+
+
+def average_games_played() -> int:
+    from src.scrape.team_wins_losses import get_team_wins_losses_cached
+    from src.scrape.teams import TEAMS
+
+    counts = [len(get_team_wins_losses_cached(team, ROOT / ".teams")) for team in TEAMS]
+    return round(sum(counts) / len(counts))
 
 
 def copy_images(date: str):
@@ -144,22 +157,19 @@ async def east_vs_west_{date_under}():
     path.write_text(content)
 
 
-def update_index_html(date_human: str, prev_date_human: str, week: int, prev_week: int):
+def update_index_html(date_human: str, week: int, games: str):
     path = ROOT / "src" / "web" / "index.html"
     content = path.read_text()
 
-    old_standings = f'<p class="section-meta">Week {prev_week} · {prev_date_human}</p>'
-    new_standings = f'<p class="section-meta">Week {week} · {date_human}</p>'
-    if old_standings not in content:
-        fatal(f"Could not find standings section-meta in index.html")
-    content = content.replace(old_standings, new_standings)
-
-    old_meta = f'<p class="section-meta">{prev_date_human}</p>'
-    new_meta = f'<p class="section-meta">{date_human}</p>'
-    count = content.count(old_meta)
-    if count != 2:
-        fatal(f"Expected 2 date-only section-meta in index.html, found {count}")
-    content = content.replace(old_meta, new_meta)
+    content, n = re.subn(r'<p class="section-meta">Week \d+ · [^<]+</p>',
+                         f'<p class="section-meta">Week {week} · {date_human}</p>', content)
+    if n != 1:
+        fatal(f"Expected 1 week section-meta in index.html, found {n}")
+    content, n = re.subn(r'<p class="section-meta">[A-Z][a-z]+ \d{1,2}, \d{4}</p>',
+                         f'<p class="section-meta">{date_human}</p>', content)
+    if n != 2:
+        fatal(f"Expected 2 date-only section-meta in index.html, found {n}")
+    content = re.sub(r"Games over \.500 through ~?\d+ games played", f"Games over .500 through {games} games played", content)
 
     path.write_text(content)
 
@@ -186,7 +196,7 @@ def update_standings_html(date: str, date_human: str, week: int, games: str):
                             </div>
                             <img
                                 src="/nba-standings/eastern-conference/{date}.png"
-                                alt="NBA Eastern Conference Cumulative Standings Graph {date_human} - Shows win-loss record progression for all 15 Eastern Conference teams through the 2025-26 NBA season"
+                                alt="NBA Eastern Conference Cumulative Standings Graph {date_human} - Shows win-loss record progression for all 15 Eastern Conference teams through the {SEASON} NBA season"
                                 width="1200"
                                 height="800"
                                 loading="lazy"
@@ -207,7 +217,7 @@ def update_standings_html(date: str, date_human: str, week: int, games: str):
                             </div>
                             <img
                                 src="/nba-standings/western-conference/{date}.png"
-                                alt="NBA Western Conference Cumulative Standings Graph {date_human} - Shows win-loss record progression for all 15 Western Conference teams through the 2025-26 NBA season"
+                                alt="NBA Western Conference Cumulative Standings Graph {date_human} - Shows win-loss record progression for all 15 Western Conference teams through the {SEASON} NBA season"
                                 width="1200"
                                 height="800"
                                 loading="lazy"
@@ -243,7 +253,7 @@ def update_head_to_head_html(date: str, date_human: str, week: int):
                     <a href="/nba-head-to-head/{date}.png" title="View full size">
                         <img
                             src="/nba-head-to-head/{date}.png"
-                            alt="NBA Head-to-Head Records Heatmap {date_human} - Shows every team's record against every other team in the 2025-26 NBA season"
+                            alt="NBA Head-to-Head Records Heatmap {date_human} - Shows every team's record against every other team in the {SEASON} NBA season"
                             width="1000"
                             height="1000"
                             loading="lazy"
@@ -278,7 +288,7 @@ def update_east_vs_west_html(date: str, date_human: str, week: int):
                     <a href="/nba-east-vs-west/{date}.png" title="View full size">
                         <img
                             src="/nba-east-vs-west/{date}.png"
-                            alt="NBA East vs West Conference Battle {date_human} - Shows cumulative inter-conference record throughout the 2025-26 NBA season"
+                            alt="NBA East vs West Conference Battle {date_human} - Shows cumulative inter-conference record throughout the {SEASON} NBA season"
                             width="900"
                             height="450"
                             loading="lazy"
@@ -300,30 +310,9 @@ def update_sitemap(date: str, date_human: str, prev_date: str):
     path = ROOT / "src" / "web" / "sitemap.xml"
     content = path.read_text()
 
-    content = content.replace(f"<lastmod>{prev_date}</lastmod>", f"<lastmod>{date}</lastmod>")
-
-    homepage_images = f"""
-    <image:image>
-      <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/{date}.png</image:loc>
-      <image:title>NBA Eastern Conference Standings Over Time - {date_human}</image:title>
-      <image:caption>Graph showing NBA Eastern Conference standings over time through {date_human}</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://hoopsgraphs.com/nba-standings/western-conference/{date}.png</image:loc>
-      <image:title>NBA Western Conference Standings Over Time - {date_human}</image:title>
-      <image:caption>Graph showing NBA Western Conference standings over time through {date_human}</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://hoopsgraphs.com/nba-head-to-head/{date}.png</image:loc>
-      <image:title>NBA Head-to-Head Records - {date_human}</image:title>
-      <image:caption>Heatmap showing every NBA team's record against every other team through {date_human}</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://hoopsgraphs.com/nba-east-vs-west/{date}.png</image:loc>
-      <image:title>NBA East vs West Conference Battle - {date_human}</image:title>
-      <image:caption>Graph showing cumulative inter-conference record between East and West through {date_human}</image:caption>
-    </image:image>"""
-    content = insert_after_in_section(content, "<!-- Homepage -->", "<priority>1.0</priority>", homepage_images)
+    # Bump lastmod only on the live pages, not on past seasons' archives.
+    for loc in ["/", "/nba-standings/", "/nba-head-to-head/", "/nba-east-vs-west/"]:
+        content = re.sub(rf"(<loc>https://hoopsgraphs.com{re.escape(loc)}</loc>\s*<lastmod>)[^<]+", rf"\g<1>{date}", content)
 
     standings_images = f"""
     <image:image>
@@ -382,11 +371,8 @@ def main():
 
     standings_html = (ROOT / "src" / "web" / "nba-standings.html").read_text()
     m = re.search(r'<h2>Week (\d+)</h2>', standings_html)
-    if not m:
-        fatal("Could not find week number in nba-standings.html")
-    PREV_WEEK = int(m.group(1))
+    PREV_WEEK = int(m.group(1)) if m else 0  # no weeks yet: first update of a new season
     WEEK = PREV_WEEK + 1
-    GAMES = f"~{WEEK * 3}"
 
     print(f"Week {WEEK}: {DATE} ({DATE_HUMAN})")
     print(f"Previous: Week {PREV_WEEK}, {PREV_DATE}")
@@ -396,13 +382,15 @@ def main():
     generate_graphs()
     print()
 
+    GAMES = f"~{average_games_played()}"
+
     print("Copying images...")
     copy_images(DATE)
     print()
 
     print("Updating site files...")
     update_main_py(DATE, DATE_UNDER, PREV_DATE)
-    update_index_html(DATE_HUMAN, PREV_DATE_HUMAN, WEEK, PREV_WEEK)
+    update_index_html(DATE_HUMAN, WEEK, GAMES)
     update_standings_html(DATE, DATE_HUMAN, WEEK, GAMES)
     update_head_to_head_html(DATE, DATE_HUMAN, WEEK)
     update_east_vs_west_html(DATE, DATE_HUMAN, WEEK)

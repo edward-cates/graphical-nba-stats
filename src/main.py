@@ -4,7 +4,7 @@ import json
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 
 # Load environment variables from .env.json
 env_path = Path('.env.json')
@@ -15,6 +15,16 @@ if env_path.exists():
             os.environ[key] = str(value)
 
 app = FastAPI()
+
+
+@app.middleware("http")
+async def answer_head_requests(request, call_next):
+    # FastAPI routes only answer GET; crawlers and link checkers also send HEAD.
+    if request.method != "HEAD":
+        return await call_next(request)
+    request.scope["method"] = "GET"
+    response = await call_next(request)
+    return Response(status_code=response.status_code, headers=dict(response.headers))
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="src/web"), name="static")
@@ -785,6 +795,24 @@ async def nba_head_to_head():
 @app.get("/nba-east-vs-west/", response_class=HTMLResponse)
 async def nba_east_vs_west():
     with open("src/web/nba-east-vs-west.html", "r") as f:
+        return f.read()
+
+
+@app.get("/nba-standings/2025-26/", response_class=HTMLResponse)
+async def nba_standings_2025_26():
+    with open("src/web/nba-standings-2025-26.html", "r") as f:
+        return f.read()
+
+
+@app.get("/nba-head-to-head/2025-26/", response_class=HTMLResponse)
+async def nba_head_to_head_2025_26():
+    with open("src/web/nba-head-to-head-2025-26.html", "r") as f:
+        return f.read()
+
+
+@app.get("/nba-east-vs-west/2025-26/", response_class=HTMLResponse)
+async def nba_east_vs_west_2025_26():
+    with open("src/web/nba-east-vs-west-2025-26.html", "r") as f:
         return f.read()
 
 

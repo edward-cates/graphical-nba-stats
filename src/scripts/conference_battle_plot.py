@@ -8,6 +8,7 @@ from pathlib import Path
 
 import plotly.graph_objects as go
 
+from src.season import season_label
 from src.scrape.teams import TEAMS
 from src.scrape.team_wins_losses import get_team_wins_losses_cached
 
@@ -218,7 +219,7 @@ def generate_conference_battle_plot(output_dir: Path = Path(".conference_battle"
     fig.add_annotation(
         x=0.0, y=1.05,
         xref="paper", yref="paper",
-        text=f"2025–26 Season  ·  {today}",
+        text=f"{season_label('–')} Season  ·  {today}",
         showarrow=False,
         font=dict(size=13, color=muted_text, family="Arial, Helvetica, sans-serif"),
         xanchor="left",

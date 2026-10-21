@@ -1,11 +1,12 @@
 import json
-import re
 from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
 import requests
-from bs4 import BeautifulSoup
+import pytz
+
+EASTERN = pytz.timezone("US/Eastern")
 
 
 class GameResult(TypedDict):
@@ -16,75 +17,36 @@ class GameResult(TypedDict):
 
 
 def get_team_wins_losses(team_abbreviation: str) -> list[GameResult]:
-    """Scrape wins/losses for a team from ESPN."""
-    url = f"https://www.espn.com/nba/team/schedule/_/name/{team_abbreviation}/seasontype/2"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
-    response = requests.get(url, headers=headers)
+    """Fetch completed regular-season wins/losses for a team from ESPN's schedule JSON.
+
+    (The HTML schedule page returns an empty 202 to cloud IPs, so we use the API it's built on.)
+    """
+    url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{team_abbreviation}/schedule"
+    response = requests.get(url, params={"seasontype": 2}, timeout=30)
     response.raise_for_status()
 
-    soup = BeautifulSoup(response.text, "html.parser")
-    table = soup.find("table")
-
-    if table is None:
-        raise ValueError("No table found on page")
-
-    # Extract season years from h1 (e.g. "Memphis Grizzlies Schedule 2025-26")
-    h1 = table.find_previous("h1")
-    season_match = re.search(r"(\d{4})-(\d{2})", h1.get_text() if h1 else "")
-    if season_match:
-        first_year = int(season_match.group(1))
-        second_year = 2000 + int(season_match.group(2))
-    else:
-        # Fallback to current season
-        now = datetime.now()
-        first_year = now.year if now.month >= 10 else now.year - 1
-        second_year = first_year + 1
-
     results = []
-    for row in table.find_all("tr"):
-        # Check if this is a completed game (has W or L symbol)
-        symbol = row.find(attrs={"data-testid": "symbol"})
-        if not symbol:
+    for event in response.json().get("events", []):
+        competition = event["competitions"][0]
+        if not competition["status"]["type"]["completed"]:
+            continue
+        us = them = None
+        for competitor in competition["competitors"]:
+            if competitor["team"]["abbreviation"].lower() == team_abbreviation:
+                us = competitor
+            else:
+                them = competitor
+        if us is None or them is None:
             continue
 
-        date_elem = row.find(attrs={"data-testid": "date"})
-        if not date_elem:
-            continue
-
-        date_text = date_elem.get_text(strip=True)  # e.g. "Wed, Oct 22"
-        win = symbol.get_text(strip=True) == "W"
-
-        # Get opponent name and abbreviation from link
-        opponent_elem = row.find(attrs={"data-testid": "opponent"})
-        opponent = ""
-        opponent_abbrev = ""
-        if opponent_elem:
-            opponent = opponent_elem.get_text(strip=True)
-            # Clean up opponent text (remove "vs" or "@" prefix)
-            opponent = re.sub(r"^(vs|@)\s*", "", opponent).strip()
-            # Extract abbreviation from opponent link (e.g. /nba/team/_/name/no/...)
-            link = opponent_elem.find("a", href=re.compile(r"/nba/team/_/name/"))
-            if link and link.get("href"):
-                match = re.search(r"/nba/team/_/name/([^/]+)", link["href"])
-                if match:
-                    opponent_abbrev = match.group(1)
-
-        # Parse the date (add dummy year to avoid deprecation warning)
-        try:
-            parsed = datetime.strptime(f"{date_text} 2000", "%a, %b %d %Y")
-            # Determine year based on month
-            year = first_year if parsed.month >= 10 else second_year
-            date_str = f"{year % 100:02d}-{parsed.month:02d}-{parsed.day:02d}"
-            results.append({
-                "date": date_str,
-                "opponent": opponent,
-                "opponent_abbrev": opponent_abbrev,
-                "win": win,
-            })
-        except ValueError:
-            continue  # Skip unparseable dates
+        # Game dates are UTC; night games belong to the previous US calendar day.
+        tipoff = datetime.fromisoformat(event["date"].replace("Z", "+00:00")).astimezone(EASTERN)
+        results.append({
+            "date": tipoff.strftime("%y-%m-%d"),
+            "opponent": them["team"].get("shortDisplayName", ""),
+            "opponent_abbrev": them["team"]["abbreviation"].lower(),
+            "win": bool(us.get("winner")),
+        })
 
     return results
 

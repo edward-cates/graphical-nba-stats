@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import plotly.graph_objects as go
 
+from src.season import season_label
 from src.scrape.teams import TEAMS
 from src.scrape.team_wins_losses import get_team_wins_losses_cached
 
@@ -248,7 +249,7 @@ def generate_head_to_head_plot(output_dir: Path = Path(".head_to_head")):
         y=1.018,
         xref="paper",
         yref="paper",
-        text=f"2025–26 Season  ·  {today}",
+        text=f"{season_label('–')} Season  ·  {today}",
         showarrow=False,
         font=dict(
             size=11,

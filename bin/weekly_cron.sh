@@ -7,7 +7,11 @@ echo "=== $(date -u +%FT%TZ)"
 
 # Chrome for Testing has no linux-arm64 build; kaleido renders with Playwright's Chromium instead.
 export BROWSER_PATH=$(ls -d ~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome | tail -1)
-export PATH="$PWD/.venv/bin:$PATH"
+export PATH="$PWD/.venv/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
+
+# Cron has no session secrets; load GH_TOKEN from SSM and hand it to git.
+eval "$(agent-secrets)"
+git config credential.helper '!f() { echo username=x-access-token; echo "password=$GH_TOKEN"; }; f'
 
 git pull -q --rebase origin main
 python scripts/weekly_update.py

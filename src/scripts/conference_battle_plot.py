@@ -109,8 +109,9 @@ def generate_conference_battle_plot(output_dir: Path = Path(".conference_battle"
     total_west = data["total_west"]
 
     if not daily:
-        print("No inter-conference games found")
-        return None
+        # Opening days: no East-West games yet, so draw the even starting line.
+        print("No inter-conference games yet; plotting an even record")
+        daily = [{"date": get_cache_date_suffix(), "east_wins": 0, "west_wins": 0, "cumulative": 0}]
 
     # Parse dates and values
     dates = [parse_date(d["date"]) for d in daily]

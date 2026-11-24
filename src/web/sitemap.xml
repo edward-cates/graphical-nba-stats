@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://hoopsgraphs.com/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <!-- Latest URLs (stable entry points, always redirect to current week) -->
@@ -47,9 +47,19 @@
   <!-- Standings Archive -->
   <url>
     <loc>https://hoopsgraphs.com/nba-standings/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/2026-11-24.png</image:loc>
+      <image:title>NBA Eastern Conference Standings Over Time - November 24, 2026</image:title>
+      <image:caption>Graph showing NBA Eastern Conference standings over time through November 24, 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-standings/western-conference/2026-11-24.png</image:loc>
+      <image:title>NBA Western Conference Standings Over Time - November 24, 2026</image:title>
+      <image:caption>Graph showing NBA Western Conference standings over time through November 24, 2026</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://hoopsgraphs.com/nba-standings/eastern-conference/2026-11-17.png</image:loc>
       <image:title>NBA Eastern Conference Standings Over Time - November 17, 2026</image:title>
@@ -303,9 +313,14 @@
   <!-- Head-to-Head Archive -->
   <url>
     <loc>https://hoopsgraphs.com/nba-head-to-head/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-head-to-head/2026-11-24.png</image:loc>
+      <image:title>NBA Head-to-Head Records - November 24, 2026</image:title>
+      <image:caption>Heatmap showing every NBA team's record against every other team through November 24, 2026</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://hoopsgraphs.com/nba-head-to-head/2026-11-17.png</image:loc>
       <image:title>NBA Head-to-Head Records - November 17, 2026</image:title>
@@ -434,9 +449,14 @@
   <!-- East vs West Archive -->
   <url>
     <loc>https://hoopsgraphs.com/nba-east-vs-west/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://hoopsgraphs.com/nba-east-vs-west/2026-11-24.png</image:loc>
+      <image:title>NBA East vs West Conference Battle - November 24, 2026</image:title>
+      <image:caption>Graph showing cumulative inter-conference record between East and West through November 24, 2026</image:caption>
+    </image:image>
     <image:image>
       <image:loc>https://hoopsgraphs.com/nba-east-vs-west/2026-11-17.png</image:loc>
       <image:title>NBA East vs West Conference Battle - November 17, 2026</image:title>
